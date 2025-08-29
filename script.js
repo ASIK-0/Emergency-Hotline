@@ -1,8 +1,8 @@
 // heart count
 const sumNumber = 1
-const queryBtn = document.querySelectorAll('.heart-btn');
+const heartqueryBtn = document.querySelectorAll('.heart-btn');
 
-for (query of queryBtn) {
+for (const query of heartqueryBtn) {
     query.addEventListener('click', function () {
         const heart = parseInt(document.getElementById('heart-count').innerText);
         const sumNum = heart + sumNumber
@@ -10,9 +10,26 @@ for (query of queryBtn) {
     })
 }
 
+// copy count
+const copySumNum = 1
+const copyQueryBtn = document.querySelectorAll('.copy-button');
+
+for(const copy of copyQueryBtn){
+    copy.addEventListener('click', function (){
+        const card = copy.parentNode.parentNode.parentNode
+        const callNumber = card.querySelector(".call-number").innerText;
+        const copyCount = parseInt(document.getElementById('copy-count').innerText);
+        const copyNum = copyCount + copySumNum
+
+        document.getElementById('copy-count').innerText = copyNum;
+        navigator.clipboard.writeText(callNumber);
+        alert('📋Number '+ callNumber +' has been copied to clipboard...')
+    })
+}
+
 // card section
 // call button 
-const callHistoryData = []
+const callHistoryData = [];
 const callBtn = document.querySelectorAll('.call-button');
 const coinNum = 20
 for (const call of callBtn) {
@@ -42,7 +59,7 @@ for (const call of callBtn) {
         callHistoryData.push(data)
         // Call history
         const historyContainer = document.getElementById('history-card')
-        historyContainer.innerText = ""
+        historyContainer.innerText = "";
         for (const data of callHistoryData) {
             const div = document.createElement("div")
             div.innerHTML =`
@@ -62,4 +79,9 @@ for (const call of callBtn) {
     })
 }
 
+// history clear 
 
+document.getElementById('clear-btn')
+.addEventListener('click',function(){
+    document.getElementById("history-card").innerHTML = '';
+})
